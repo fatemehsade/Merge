@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.TaskManagerFragment">
+
+
+    <TextView
+        android:id="@+id/txtView_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:textColor="@android:color/black"
+        android:text="NAME"/>
+
+
+
+    <EditText
+        android:id="@+id/editTxt_name"
+        android:layout_below="@+id/txtView_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:layout_margin="4dp"
+        android:textSize="10dp"
+        android:text="ENTER YOUR NAME: " />
+    <TextView
+        android:id="@+id/txtView_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTxt_name"
+        android:padding="8dp
+"
+        android:textColor="@android:color/black"
+        android:text="NumberOfWork"/>
+
+    <EditText
+        android:id="@+id/editTxt_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtView_number"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="4dp"
+        android:padding="8dp"
+        android:text="INTER YOUR NUMBER OF WORK: "
+        android:textSize="10dp" />
+
+    <Button
+        android:id="@+id/btn_make"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="MAKE"
+        android:textSize="30sp"/>
+
+
+</RelativeLayout>
