@@ -15,25 +15,47 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 
 import com.example.mycriminalintent.R;
+import com.example.mycriminalintent.activity.CrimeDetailActivity;
 import com.example.mycriminalintent.javaClass.Crime;
+import com.example.mycriminalintent.repository.CrimeRepository;
+
+import java.util.UUID;
 
 
 public class CrimeFragment extends Fragment {
     private Crime mCrime;
+    public static final String ARGS_CRIME_ID = "crimeId";
     private EditText mEditTextTitle;
     private Button mButtonDate;
     private CheckBox mSolved;
+    private CrimeRepository mRepository;
 
 
     public CrimeFragment() {
         // Required empty public constructor
     }
 
+    public static CrimeFragment newInstance(UUID uuid) {
+
+        Bundle args = new Bundle();
+        args.getSerializable(ARGS_CRIME_ID);
+        CrimeFragment fragment = new CrimeFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mCrime=new Crime();
+        mRepository=CrimeRepository.getInstance();
+        //UUID uuid= (UUID) getActivity().getIntent().getSerializableExtra(CrimeDetailActivity.EXTRA_CRIME_ID);
+        UUID crimeId= (UUID) getArguments().getSerializable(ARGS_CRIME_ID);
+        mCrime=mRepository.getCrime(crimeId);
+        mRepository=CrimeRepository.getInstance();
+
+
 
     }
 
@@ -44,7 +66,14 @@ public class CrimeFragment extends Fragment {
        View view= inflater.inflate(R.layout.fragment_crime, container, false);
         findViews(view);
         setListener();
+        initViews();
         return view;
+    }
+    private void initViews(){
+        mEditTextTitle.setText(mCrime.getTitle());
+        mSolved.setChecked(mCrime.isSolved());
+        mButtonDate.setText(mCrime.getDate().toString());
+        mButtonDate.setEnabled(false);
     }
 
 

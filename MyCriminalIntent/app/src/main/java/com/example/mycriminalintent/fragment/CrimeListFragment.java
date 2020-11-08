@@ -1,5 +1,6 @@
 package com.example.mycriminalintent.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.mycriminalintent.R;
+import com.example.mycriminalintent.activity.CrimeDetailActivity;
 import com.example.mycriminalintent.javaClass.Crime;
 import com.example.mycriminalintent.repository.CrimeRepository;
 
@@ -20,11 +22,23 @@ import java.util.List;
 
 
 public class CrimeListFragment extends Fragment {
+    private CrimeRepository mRepository;
     private RecyclerView mRecyclerView;
+    public static final String EXTRA_CRIME_ID="com.example.mycriminalintent.fragmentCrimeId";
 
 
     public CrimeListFragment() {
         // Required empty public constructor
+        mRepository=CrimeRepository.getInstance();
+    }
+
+    public static CrimeListFragment newInstance() {
+
+        Bundle args = new Bundle();
+
+        CrimeListFragment fragment = new CrimeListFragment();
+        fragment.setArguments(args);
+        return fragment;
     }
 
 
@@ -46,8 +60,7 @@ public class CrimeListFragment extends Fragment {
 
     private void initViews() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        CrimeRepository crimeRepository=CrimeRepository.getInstance();
-        List<Crime> crimes=crimeRepository.getCrimes();
+        List<Crime> crimes=mRepository.getCrimes();
         CrimeAdaptor crimeAdaptor=new CrimeAdaptor(crimes);
         mRecyclerView.setAdapter(crimeAdaptor);
     }
@@ -65,6 +78,14 @@ public class CrimeListFragment extends Fragment {
             super(itemView);
             mTextViewTitle=itemView.findViewById(R.id.row_crime_title);
             mTextViewDate=itemView.findViewById(R.id.row_crime_date);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent=CrimeDetailActivity.newIntent(getActivity(),mCrime.getId());
+                    startActivity(intent);
+
+                }
+            });
         }
         public void bindCrime(Crime crime){
             mCrime=crime;

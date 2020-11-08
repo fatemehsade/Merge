@@ -16,7 +16,7 @@ public class CrimeRepository {
         mCrimes=new ArrayList<>();
         for (int i = 0; i <CRIME_SIZE ; i++) {
             Crime crimes=new Crime();
-            crimes.setTitle("crime"+i+1);
+            crimes.setTitle("crime "+(i+1));
             crimes.setSolved(i%2==0);
             mCrimes.add(crimes);
 
