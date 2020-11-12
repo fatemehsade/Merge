@@ -19,28 +19,28 @@ public class TaskManagerHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         StringBuilder queryTask=new StringBuilder();
-        queryTask.append("CREATE TABLE "+TaskManagerSchema.TASK.NAME+" (");
-        queryTask.append(taskColumns.ID+" TEXT NOT NULL ,");
-        queryTask.append(taskColumns.TITLE+" TEXT, ");
-        queryTask.append(taskColumns.USERID+" TEXT NOT NULL");
-        queryTask.append(taskColumns.DESCRIPTION+" TEXT, ");
-        queryTask.append(taskColumns.STATE+" TEXT, ");
-        queryTask.append(taskColumns.DATE+" TEXT, ");
-        queryTask.append(taskColumns.TIME+" TEXT, ");
+        queryTask.append("CREATE TABLE " + TaskManagerSchema.TASK.NAME + " ( ");
+        queryTask.append(taskColumns.ID + " TEXT NOT NULL ,");
+        queryTask.append(taskColumns.TITLE + " TEXT, ");
+        queryTask.append(taskColumns.DESCRIPTION + " TEXT, ");
+        queryTask.append(taskColumns.DATE + " TEXT, ");
+        queryTask.append(taskColumns.TIME + " TEXT, ");
+        queryTask.append(taskColumns.STATE + " TEXT, ");
+        queryTask.append(taskColumns.USERID + " TEXT NOT NULL");
         queryTask.append(" ); ");
         db.execSQL(queryTask.toString());
 
 
         StringBuilder queryUser=new StringBuilder();
-        queryUser.append("CREATE TABLE "+TaskManagerSchema.User.NAME+" (");
-        queryUser.append(TaskManagerSchema.User.userColumns.USERNAME+ " TEXT NOT NULL ,");
-        queryUser.append(userColumns.PASSWORD+" TEXT NOT NULL ,");
-        queryUser.append(userColumns.ID+" TEXT NOT NULL ,");
-        queryUser.append(userColumns.UUID+" TEXT, ");
-        queryUser.append(userColumns.ISADMINE+" INTEGER, ");
+        queryUser.append("CREATE TABLE "+TaskManagerSchema.User.NAME+" ( ");
+        queryUser.append(userColumns.ID+" INTEGER PRIMARY KEY NOT NULL , ");
+        queryUser.append(userColumns.UUID+" TEXT NOT NULL , ");
+        queryUser.append(userColumns.USERNAME+" TEXT NOT NULL, ");
+        queryUser.append(userColumns.PASSWORD+" TEXT NOT NULL, ");
         queryUser.append(userColumns.MEMBERSHIP+" TEXT, ");
+        queryUser.append(userColumns.ISADMINE+" INTEGER ");
         queryUser.append(" ); ");
-        db.execSQL(queryUser.toString());
+
 
 
 

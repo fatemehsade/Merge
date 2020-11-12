@@ -1,5 +1,10 @@
 package com.example.taskmanagerapp.Model;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
+import java.util.Objects;
 import java.util.UUID;
 
 public class User {
@@ -41,5 +46,22 @@ public class User {
 
     public UUID getUserId() {
         return userId;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(userName, user.userName) &&
+                Objects.equals(password, user.password) &&
+                Objects.equals(userId, user.userId);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @Override
+    public int hashCode() {
+        return Objects.hash(userName, password, userId);
     }
 }
